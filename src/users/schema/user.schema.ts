@@ -15,6 +15,14 @@ export class User {
   address: string;
   @Prop()
   age: number;
+  @Prop()
+  isDeleted: boolean;
+  @Prop()
+  deletedAt: Date;
+  @Prop()
+  createdAt: Date;
+  @Prop()
+  updatedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
