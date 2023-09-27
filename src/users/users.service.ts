@@ -13,9 +13,6 @@ export class UsersService {
     const hash = hashSync(password, salt);
     return hash;
   };
-  isValidPassword = (password: string, hash: string) => {
-    return compareSync(password, hash);
-  };
   async create(createUserDto: CreateUserDto) {
     const { email, password, name, address, age } = createUserDto;
     const hashPassword = this.hashPassword(password);
@@ -39,9 +36,15 @@ export class UsersService {
     return this.userModel.findOne({ _id: id });
   }
   findOneByUsername(username: string) {
+    console.log("🚀 ~ file: users.service.ts:39 ~ UsersService ~ findOneByUsername ~ username:", username)
     return this.userModel.findOne({ email: username });
   }
 
+  isValidPassword = (password: string, hash: string) => {
+    console.log("🚀 ~ file: users.service.ts:43 ~ UsersService ~ hash:", hash)
+    console.log("🚀 ~ file: users.service.ts:43 ~ UsersService ~ password:", password)
+    return compareSync(password, hash);
+  };
   update(id: string, updateUserDto: UpdateUserDto) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return 'not found user';
