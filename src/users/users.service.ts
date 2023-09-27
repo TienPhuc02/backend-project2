@@ -36,13 +36,10 @@ export class UsersService {
     return this.userModel.findOne({ _id: id });
   }
   findOneByUsername(username: string) {
-    console.log("🚀 ~ file: users.service.ts:39 ~ UsersService ~ findOneByUsername ~ username:", username)
     return this.userModel.findOne({ email: username });
   }
 
   isValidPassword = (password: string, hash: string) => {
-    console.log("🚀 ~ file: users.service.ts:43 ~ UsersService ~ hash:", hash)
-    console.log("🚀 ~ file: users.service.ts:43 ~ UsersService ~ password:", password)
     return compareSync(password, hash);
   };
   update(id: string, updateUserDto: UpdateUserDto) {
