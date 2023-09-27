@@ -1,4 +1,4 @@
-import { IsEAN, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
   @IsEmail({}, { message: 'Email must be an email' })
