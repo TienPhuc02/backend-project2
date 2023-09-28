@@ -16,7 +16,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-
     //logic lấy ra metadata
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
@@ -30,7 +29,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
   handleRequest(err: any, user: any) {
     if (err || !user) {
-      throw err || new UnauthorizedException('Token không hợp lệ');
+      throw (
+        err ||
+        new UnauthorizedException(
+          'Token không hợp lệ or không có token ở Bearer Token ở Header Request',
+        )
+      );
     }
     return user;
   }
