@@ -6,6 +6,8 @@ import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { IUser } from 'src/users/users.interface';
 import mongoose from 'mongoose';
+import aqp from 'api-query-params';
+import { isEmpty } from 'class-validator';
 
 @Injectable()
 export class CompaniesService {
@@ -23,8 +25,34 @@ export class CompaniesService {
     });
   }
 
-  findAll() {
-    return `This action returns all companies`;
+  async findAll(current: number, pageSize: number, qs: string) {
+    const { filter, sort, population } = aqp(qs);
+    delete filter.current;
+    delete filter.pageSize;
+    const offset:number = (+current - 1) * +pageSize;
+    const defaultLimit = +pageSize ? +pageSize : 10;
+    const totalItems = (await this.companyModel.find(filter)).length;
+    const totalPages = Math.ceil(totalItems / defaultLimit);
+    // if (isEmpty(sort)) {
+    //   // @ts-ignore: Unreachable code error
+    //   sort = '-updatedAt';
+    // }
+    const result = await this.companyModel
+      .find(filter)
+      .skip(offset)
+      .limit(defaultLimit)
+      .sort(sort as any)
+      .populate(population)
+      .exec();
+    return {
+      meta: {
+        current: current, //trang hien tai
+        pageSize: pageSize, // so luong ban ghi 1 trang
+        pages: totalPages, //tong so trang
+        total: totalItems, //tong so ban ghi
+      },
+      result,
+    };
   }
 
   findOne(id: number) {

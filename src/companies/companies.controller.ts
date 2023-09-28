@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
@@ -23,8 +24,12 @@ export class CompaniesController {
   }
 
   @Get()
-  findAll() {
-    return this.companiesService.findAll();
+  findAll(
+    @Query('current') current: number,
+    @Query('pageSize') pageSize: number,
+    @Query() qs: string,
+  ) {
+    return this.companiesService.findAll(current, pageSize, qs);
   }
 
   @Get(':id')
@@ -42,7 +47,7 @@ export class CompaniesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string,@User() user:IUser) {
-    return this.companiesService.remove(id,user);
+  remove(@Param('id') id: string, @User() user: IUser) {
+    return this.companiesService.remove(id, user);
   }
 }
