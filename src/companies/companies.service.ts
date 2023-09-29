@@ -29,14 +29,14 @@ export class CompaniesService {
     const { filter, sort, population } = aqp(qs);
     delete filter.current;
     delete filter.pageSize;
-    const offset:number = (+current - 1) * +pageSize;
+    const offset: number = (+current - 1) * +pageSize;
     const defaultLimit = +pageSize ? +pageSize : 10;
     const totalItems = (await this.companyModel.find(filter)).length;
     const totalPages = Math.ceil(totalItems / defaultLimit);
-    // if (isEmpty(sort)) {
-    //   // @ts-ignore: Unreachable code error
-    //   sort = '-updatedAt';
-    // }
+    if ((sort as any) === '-updatedAt') {
+      // @ts-ignore: Unreachable code error
+      sort = '-updatedAt';
+    }
     const result = await this.companyModel
       .find(filter)
       .skip(offset)
