@@ -1,5 +1,11 @@
 import { Type } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsObject, ValidateNested } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
+  ValidateNested,
+} from 'class-validator';
 import mongoose from 'mongoose';
 
 class Company {
@@ -36,7 +42,6 @@ export class RegisterUserDto {
     message: 'Please Enter Your Name',
   })
   name: string;
-  @IsEmail({}, { message: 'Invalid email message' })
   @IsNotEmpty({
     message: 'Please Enter Your Email',
   })

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, RegisterUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schema/user.schema';
 import mongoose from 'mongoose';
@@ -21,6 +21,19 @@ export class UsersService {
     const hashPassword = this.hashPassword(password);
     return await this.userModel.create({
       email,
+      password: hashPassword,
+      name,
+      address,
+      age,
+    });
+  }
+  async register(registerUserDto: RegisterUserDto) {
+    const { email, password, name, address, age, gender } = registerUserDto;
+    console.log("🚀 ~ file: users.service.ts:32 ~ UsersService ~ register ~ registerUserDto:", registerUserDto)
+    const hashPassword = this.hashPassword(password);
+    return await this.userModel.create({
+      email,
+      gender,
       password: hashPassword,
       name,
       address,
