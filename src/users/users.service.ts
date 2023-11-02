@@ -99,7 +99,6 @@ export class UsersService {
   }
 
   isValidPassword = (password: string, hash: string) => {
-   
     return compareSync(password, hash);
   };
   update(id: string, updateUserDto: UpdateUserDto, user: IUser) {
@@ -140,4 +139,12 @@ export class UsersService {
     );
     return this.userModel.softDelete({ _id: id });
   }
+  updateUserToken = async (refreshToken: string, _id: string) => {
+    await this.userModel.updateOne(
+      { _id },
+      {
+        refreshToken,
+      },
+    );
+  };
 }
