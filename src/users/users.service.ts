@@ -95,10 +95,11 @@ export class UsersService {
     return this.userModel.findOne({ _id: id }).select('-password');
   }
   findOneByUsername(username: string) {
-    return this.userModel.findOne({ email: username }).select('-password');
+    return this.userModel.findOne({ email: username });
   }
 
   isValidPassword = (password: string, hash: string) => {
+   
     return compareSync(password, hash);
   };
   update(id: string, updateUserDto: UpdateUserDto, user: IUser) {
