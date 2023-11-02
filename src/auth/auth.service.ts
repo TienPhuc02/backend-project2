@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -25,10 +25,13 @@ export class AuthService {
     return null;
   }
   async login(user: any, response: Response) {
-    const { email, _id, role, name } = user;
+    const { email, _id, role, name, age, gender, address } = user;
     const payload = {
       email,
       _id,
+      age,
+      gender,
+      address,
       role,
       name,
       sub: 'token login',
@@ -52,10 +55,13 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
       refresh_token,
       user: {
-        _id,
-        name,
         email,
+        _id,
+        age,
+        gender,
+        address,
         role,
+        name,
       },
     };
   }
@@ -66,5 +72,14 @@ export class AuthService {
         ms(this.configService.get<string>('JWT_REFRESH_EXPIRE')) / 1000,
     });
     return refresh_token;
+  };
+  processNewToken = (refreshToken: string) => {
+    try {
+      this.jwtService.verify(refreshToken, {
+        secret: this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET'),
+      });
+    } catch (error) {
+      throw new BadRequestException(`Refresh không hợp lệ`);
+    }
   };
 }
