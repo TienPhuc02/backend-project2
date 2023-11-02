@@ -21,8 +21,6 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNotEmpty({ message: 'Please Enter Your Email' })
   @IsEmail({}, { message: 'Email Must Be An Email' })
   email: string;
-  @IsNotEmpty({ message: 'Please Enter Your Password' })
-  password: string;
   @IsNotEmpty({ message: 'Please Enter Your Age' })
   age: number;
   @IsNotEmpty({ message: 'Please Enter Your Gender' })
