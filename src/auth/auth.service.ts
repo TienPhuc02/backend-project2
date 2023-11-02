@@ -38,10 +38,6 @@ export class AuthService {
       iss: 'from server',
     };
     const refresh_token = await this.createRefreshToken(payload);
-    console.log(
-      '🚀 ~ file: auth.service.ts:37 ~ AuthService ~ login ~ refresh_token:',
-      refresh_token,
-    );
 
     //update user with refreshtoken
     await this.usersService.updateUserToken(refresh_token, _id);
@@ -53,7 +49,6 @@ export class AuthService {
     });
     return {
       access_token: this.jwtService.sign(payload),
-      refresh_token,
       user: {
         email,
         _id,
@@ -73,13 +68,59 @@ export class AuthService {
     });
     return refresh_token;
   };
-  processNewToken = (refreshToken: string) => {
+  async processNewToken(refreshToken: string, response: Response) {
     try {
       this.jwtService.verify(refreshToken, {
         secret: this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET'),
       });
+
+      console.log(
+        '🚀 ~ file: auth.service.ts:78 ~ AuthService ~ processNewToken ~ refreshToken:',
+        refreshToken,
+      );
+      const user = await this.usersService.findUserByToken(refreshToken);
+      if (user) {
+        const { email, _id, name, role, age, gender, address } = user;
+        const payload = {
+          email,
+          _id,
+          age,
+          gender,
+          address,
+          role,
+          name,
+          sub: 'refresh token',
+          iss: 'from server',
+        };
+        const refresh_token = await this.createRefreshToken(payload);
+
+        await this.usersService.updateUserToken(refresh_token, _id.toString());
+
+        response.clearCookie('refresh_token');
+        response.cookie('refresh_token', refresh_token, {
+          httpOnly: true,
+          maxAge: ms(this.configService.get<string>('JWT_REFRESH_EXPIRE')),
+        });
+
+        return {
+          access_token: this.jwtService.sign(payload),
+          user: {
+            email,
+            _id,
+            age,
+            gender,
+            address,
+            role,
+            name,
+          },
+        };
+      } else {
+        throw new BadRequestException(
+          `Refresh Token không hợp lệ. Vui lòng đăng nhập`,
+        );
+      }
     } catch (error) {
-      throw new BadRequestException(`Refresh không hợp lệ`);
+      throw new BadRequestException(`Refresh Token không hợp lệ`);
     }
-  };
+  }
 }

@@ -47,7 +47,7 @@ export class UsersService {
   async register(registerUserDto: RegisterUserDto) {
     const { email, password, name, address, age, gender } = registerUserDto;
     const isExist = this.userModel.findOne({ email });
-    if (isExist) {
+    if (!isExist) {
       throw new BadRequestException(`Email: ${email} đã tồn tại.`);
     }
     const hashPassword = this.hashPassword(password);
@@ -144,11 +144,14 @@ export class UsersService {
     return this.userModel.softDelete({ _id: id });
   }
   updateUserToken = async (refreshToken: string, _id: string) => {
-    await this.userModel.updateOne(
+    return await this.userModel.updateOne(
       { _id },
       {
         refreshToken,
       },
     );
+  };
+  findUserByToken = async (refreshToken: string) => {
+    return await this.userModel.findOne({ refreshToken });
   };
 }

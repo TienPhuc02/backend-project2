@@ -27,10 +27,6 @@ export class AuthController {
   @Post('/login')
   @ResponseMessage('Login SuccessFull!')
   handleLogin(@Req() req, @Res({ passthrough: true }) response: Response) {
-    console.log(
-      '🚀 ~ file: auth.controller.ts:22 ~ AuthController ~ handleLogin ~ req:',
-      req,
-    );
     return this.authService.login(req.user, response);
   }
 
@@ -50,8 +46,12 @@ export class AuthController {
   @Public()
   @ResponseMessage('Refresh Account Success!!')
   @Get('/refresh')
-  handleRefreshAccount(@Req() request: Request) {
+  handleRefreshAccount(@Req() request: Request, @Res({passthrough:true}) response: Response) {
     const refreshToken = request.cookies['refresh_token'];
-    return this.authService.processNewToken(refreshToken);
+    console.log(
+      '🚀 ~ file: auth.controller.ts:52 ~ AuthController ~ handleRefreshAccount ~ refreshToken:',
+      refreshToken,
+    );
+    return this.authService.processNewToken(refreshToken, response);
   }
 }
