@@ -29,10 +29,11 @@ async function bootstrap() {
   app.use(cookieParser());
   //config cors
   app.enableCors({
-    origin: '*',
+    origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,
+    credentials: true,
   });
   app.useStaticAssets(join(__dirname, '..', 'public'));
   await app.listen(configService.get<string>('PORT'));

@@ -54,4 +54,11 @@ export class AuthController {
     );
     return this.authService.processNewToken(refreshToken, response);
   }
+
+
+  @ResponseMessage("Logout Account Success!!")
+  @Post('/logout')
+  handleLogoutAccount(@User() user: IUser, @Res({passthrough:true}) response: Response) {
+    return this.authService.logout(user, response);
+  }
 }

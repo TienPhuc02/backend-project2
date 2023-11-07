@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import ms from 'ms';
 import { Response } from 'express';
+import { IUser } from 'src/users/users.interface';
 
 @Injectable()
 export class AuthService {
@@ -122,5 +123,10 @@ export class AuthService {
     } catch (error) {
       throw new BadRequestException(`Refresh Token không hợp lệ`);
     }
+  }
+  async logout(user: IUser, response: Response) {
+    await this.usersService.updateUserToken('', user._id);
+    response.clearCookie('refresh_token');
+    return 'Logout Success!!';
   }
 }
