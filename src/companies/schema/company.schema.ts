@@ -10,6 +10,8 @@ export class Company {
   @Prop()
   address: string;
   @Prop()
+  logo: string;
+  @Prop()
   description: string;
   @Prop()
   createdAt: Date;
