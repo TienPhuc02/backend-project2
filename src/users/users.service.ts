@@ -73,6 +73,18 @@ export class UsersService {
       // @ts-ignore: Unreachable code error
       sort = '-updatedAt';
     }
+    if ((sort as any) === '-name') {
+      // @ts-ignore: Unreachable code error
+      sort = '-name';
+    }
+    if ((sort as any) === '-email') {
+      // @ts-ignore: Unreachable code error
+      sort = '-email';
+    }
+    if ((sort as any) === '-createdAt') {
+      // @ts-ignore: Unreachable code error
+      sort = '-createdAt';
+    }
     const result = await this.userModel
       .find(filter)
       .skip(offset)
@@ -155,3 +167,6 @@ export class UsersService {
     return await this.userModel.findOne({ refreshToken });
   };
 }
+
+
+//nếu mà chưa có company thì tự thêm company

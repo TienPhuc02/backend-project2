@@ -74,11 +74,6 @@ export class AuthService {
       this.jwtService.verify(refreshToken, {
         secret: this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET'),
       });
-
-      console.log(
-        '🚀 ~ file: auth.service.ts:78 ~ AuthService ~ processNewToken ~ refreshToken:',
-        refreshToken,
-      );
       const user = await this.usersService.findUserByToken(refreshToken);
       if (user) {
         const { email, _id, name, role, age, gender, address } = user;

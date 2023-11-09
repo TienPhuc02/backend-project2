@@ -8,7 +8,6 @@ import { IUser } from 'src/users/users.interface';
 import mongoose from 'mongoose';
 import aqp from 'api-query-params';
 
-
 @Injectable()
 export class CompaniesService {
   constructor(
@@ -37,6 +36,18 @@ export class CompaniesService {
       // @ts-ignore: Unreachable code error
       sort = '-updatedAt';
     }
+    if ((sort as any) === '-name') {
+      // @ts-ignore: Unreachable code error
+      sort = '-name';
+    }
+    if ((sort as any) === '-address') {
+      // @ts-ignore: Unreachable code error
+      sort = '-address';
+    }
+    if ((sort as any) === '-createdAt') {
+      // @ts-ignore: Unreachable code error
+      sort = '-createdAt';
+    }
     const result = await this.companyModel
       .find(filter)
       .skip(offset)
@@ -56,7 +67,10 @@ export class CompaniesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} company`;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return 'not found company';
+    }
+    return this.companyModel.findOne({ _id: id });
   }
 
   async update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser) {

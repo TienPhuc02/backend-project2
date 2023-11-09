@@ -14,7 +14,6 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
   name: string;
   @IsNotEmpty({ message: 'Please Enter Your Skills' })
   skills: string[];
-  @IsNotEmpty({ message: 'Please Enter Your Location' })
   location: string;
   @IsNotEmpty({ message: 'Please Enter Your Salary' })
   salary: number;
@@ -33,6 +32,5 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
   startDate: Date;
   @IsNotEmpty({ message: 'Please Enter Your End Date' })
   endDate: Date;
-  @IsNotEmpty({ message: 'Please Enter Your Active' })
   active: boolean;
 }

@@ -48,10 +48,7 @@ export class AuthController {
   @Get('/refresh')
   handleRefreshAccount(@Req() request: Request, @Res({passthrough:true}) response: Response) {
     const refreshToken = request.cookies['refresh_token'];
-    console.log(
-      '🚀 ~ file: auth.controller.ts:52 ~ AuthController ~ handleRefreshAccount ~ refreshToken:',
-      refreshToken,
-    );
+   
     return this.authService.processNewToken(refreshToken, response);
   }
 
