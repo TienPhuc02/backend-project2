@@ -13,6 +13,8 @@ class Company {
   _id: mongoose.Schema.Types.ObjectId;
   @IsNotEmpty()
   name: string;
+  @IsNotEmpty()
+  logo: string;
 }
 export class CreateUserDto {
   @IsNotEmpty({ message: 'Please Enter Your Name' })

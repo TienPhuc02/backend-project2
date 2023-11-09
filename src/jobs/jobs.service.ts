@@ -24,6 +24,8 @@ export class JobsService {
       description,
       company,
       endDate,
+      location,
+      isActive,
     } = createJobDto;
     const newJob = await this.jobModel.create({
       name,
@@ -31,6 +33,8 @@ export class JobsService {
       salary,
       quantity,
       level,
+      location,
+      isActive,
       description,
       company,
       endDate,

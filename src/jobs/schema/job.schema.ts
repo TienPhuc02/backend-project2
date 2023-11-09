@@ -21,6 +21,7 @@ export class Job {
   company: {
     _id: mongoose.Schema.Types.ObjectId;
     name: string;
+    logo: string;
   };
   @Prop()
   description: string;
@@ -29,7 +30,7 @@ export class Job {
   @Prop()
   endDate: Date;
   @Prop()
-  active: boolean;
+  isActive: boolean;
   @Prop({ type: Object })
   createdBy: {
     _id: mongoose.Schema.Types.ObjectId;

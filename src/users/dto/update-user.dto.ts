@@ -14,6 +14,8 @@ class Company {
   _id: mongoose.Schema.Types.ObjectId;
   @IsNotEmpty()
   name: string;
+  @IsNotEmpty()
+  logo: string;
 }
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNotEmpty({ message: 'Please Enter Your Name' })

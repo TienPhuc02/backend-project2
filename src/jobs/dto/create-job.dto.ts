@@ -12,12 +12,15 @@ class Company {
   _id: mongoose.Schema.Types.ObjectId;
   @IsNotEmpty()
   name: string;
+  @IsNotEmpty()
+  logo: string;
 }
 export class CreateJobDto {
   @IsNotEmpty({ message: 'Please Enter Your Name' })
   name: string;
   @IsNotEmpty({ message: 'Please Enter Your Skills' })
   skills: string[];
+  @IsNotEmpty({ message: 'Please Enter Your Location' })
   location: string;
   @IsNotEmpty({ message: 'Please Enter Your Salary' })
   salary: number;
@@ -36,5 +39,6 @@ export class CreateJobDto {
   startDate: Date;
   @IsNotEmpty({ message: 'Please Enter Your End Date' })
   endDate: Date;
-  active: boolean;
+  @IsNotEmpty({ message: 'Please Enter Your isActive' })
+  isActive: boolean;
 }

@@ -1,14 +1,21 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateJobDto } from './create-job.dto';
-import { IsNotEmpty, IsNotEmptyObject, IsObject, ValidateNested } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 import mongoose from 'mongoose';
 class Company {
-    @IsNotEmpty()
-    _id: mongoose.Schema.Types.ObjectId;
-    @IsNotEmpty()
-    name: string;
-  }
+  @IsNotEmpty()
+  _id: mongoose.Schema.Types.ObjectId;
+  @IsNotEmpty()
+  name: string;
+  @IsNotEmpty()
+  logo: string;
+}
 export class UpdateJobDto extends PartialType(CreateJobDto) {
   @IsNotEmpty({ message: 'Please Enter Your Name' })
   name: string;
