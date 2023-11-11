@@ -30,7 +30,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNotEmpty({ message: 'Please Enter Your Address' })
   address: string;
   @IsNotEmpty({ message: 'Please Enter Your Role' })
-  role: string;
+  role: mongoose.Schema.Types.ObjectId;
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
