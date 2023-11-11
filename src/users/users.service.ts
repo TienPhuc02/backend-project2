@@ -21,7 +21,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto, user: IUser) {
     const { email, password, name, address, age, company, role, gender } =
       createUserDto;
-    const hashPassword = this.hashPassword(password);
+    const hashPassword = this.getHashPassword(password);
     const newUser = await this.userModel.create({
       email,
       password: hashPassword,
@@ -50,7 +50,7 @@ export class UsersService {
     if (!isExist) {
       throw new BadRequestException(`Email: ${email} đã tồn tại.`);
     }
-    const hashPassword = this.hashPassword(password);
+    const hashPassword = this.getHashPassword(password);
     return await this.userModel.create({
       email,
       gender,
