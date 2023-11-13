@@ -7,7 +7,7 @@ import { Role, RoleDocument } from './schema/role.schema';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import mongoose from 'mongoose';
 import aqp from 'api-query-params';
-
+import { ADMIN_ROLE } from 'src/databases/sample';
 @Injectable()
 export class RolesService {
   constructor(
@@ -72,10 +72,19 @@ export class RolesService {
   }
 
   async findOne(id: string) {
-    return await this.roleModel.findOne({ _id: id });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new BadRequestException('not found role');
+    }
+    return (await this.roleModel.findOne({ _id: id })).populate({
+      path: 'permissions',
+      select: { _id: 1, apitPath: 1, name: 1, method: 1, module: 1 },
+    });
   }
 
   update = async (id: string, updateRoleDto: UpdateRoleDto, user: IUser) => {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new BadRequestException('not found role');
+    }
     const { description, isActive, name, permissions } = updateRoleDto;
     const newPermissionUpdate = await this.roleModel.updateOne(
       { _id: id },
@@ -95,8 +104,8 @@ export class RolesService {
 
   remove = async (id: string, user: IUser) => {
     const foundRole = await this.roleModel.findById(id);
-    if(foundRole.name==="ADMIN"){
-      throw new BadRequestException("không thể xóa role ADMIN")
+    if (foundRole.name === ADMIN_ROLE) {
+      throw new BadRequestException('không thể xóa role ADMIN');
     }
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return 'not found permission';

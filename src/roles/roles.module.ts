@@ -10,12 +10,13 @@ import {
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),
     MongooseModule.forFeature([
+      { name: Role.name, schema: RoleSchema },
       { name: Permission.name, schema: PermissionSchema },
     ]),
   ],
   controllers: [RolesController],
   providers: [RolesService],
+  exports: [RolesModule, RolesService],
 })
 export class RolesModule {}
