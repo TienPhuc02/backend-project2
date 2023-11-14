@@ -30,28 +30,20 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   handleRequest(err, user, info, context: ExecutionContext) {
     //ley request
     const request: Request = context.switchToHttp().getRequest();
+    console.log("🚀 ~ file: jwt-auth.guard.ts:33 ~ JwtAuthGuard ~ handleRequest ~ request:", request)
 
     //check permission
     const targetMethod = request.method;
-    console.log(
-      '🚀 ~ file: jwt-auth.guard.ts:37 ~ JwtAuthGuard ~ handleRequest ~ targetMethod:',
-      targetMethod,
-    );
-    const targetEndpoint = request?.path;
-    console.log(
-      '🚀 ~ file: jwt-auth.guard.ts:39 ~ JwtAuthGuard ~ handleRequest ~ targetEndpoint:',
-      targetEndpoint,
-    );
+    console.log("🚀 ~ file: jwt-auth.guard.ts:36 ~ JwtAuthGuard ~ handleRequest ~ targetMethod:", targetMethod)
+    const targetEndpoint = request?.route?.path;
+    console.log("🚀 ~ file: jwt-auth.guard.ts:38 ~ JwtAuthGuard ~ handleRequest ~ targetEndpoint:", targetEndpoint)
     const permissions = user?.permissions ?? [];
     const isExist = permissions.find(
       (permissions) =>
         targetMethod === permissions.method &&
         targetEndpoint === permissions.apiPath,
     );
-    console.log(
-      '🚀 ~ file: jwt-auth.guard.ts:47 ~ JwtAuthGuard ~ handleRequest ~ isExist:',
-      isExist,
-    );
+   
     if (!isExist) {
       throw new ForbiddenException(
         'Bạn không có quyền để truy cập end point này',
