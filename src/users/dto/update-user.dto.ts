@@ -14,7 +14,7 @@ class Company {
   _id: mongoose.Schema.Types.ObjectId;
   @IsNotEmpty()
   name: string;
-  @IsNotEmpty()
+  // @IsNotEmpty()
   logo: string;
 }
 export class UpdateUserDto extends PartialType(CreateUserDto) {

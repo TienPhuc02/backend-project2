@@ -3,7 +3,7 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateCompanyDto {
   @IsNotEmpty({ message: 'Please Enter Your Name' })
   name: string;
-  @IsNotEmpty({ message: 'Please Enter Your Logo' })
+  // @IsNotEmpty({ message: 'Please Enter Your Logo' })
   logo: string;
   @IsNotEmpty({ message: 'Please Enter Your Address' })
   address: string;
