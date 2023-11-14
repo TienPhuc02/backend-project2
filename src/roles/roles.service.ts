@@ -77,7 +77,13 @@ export class RolesService {
     }
     return (await this.roleModel.findOne({ _id: id })).populate({
       path: 'permissions',
-      select: { _id: 1, apitPath: 1, name: 1, method: 1, module: 1 },
+      select: {
+        _id: 1,
+        apiPath: 1,
+        name: 1,
+        method: 1,
+        module: 1,
+      },
     });
   }
 
