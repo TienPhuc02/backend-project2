@@ -26,7 +26,8 @@ import { join } from 'path';
             strict: true,
           },
         },
-        preview: true,
+        preview:
+          configService.get<string>('EMAIL_PREVIEW') === 'true' ? true : false,
       }),
       inject: [ConfigService],
     }),
