@@ -12,7 +12,12 @@ import { SubscribersService } from './subscribers.service';
 import { CreateSubscriberDto } from './dto/create-subscriber.dto';
 import { UpdateSubscriberDto } from './dto/update-subscriber.dto';
 import { IUser } from 'src/users/users.interface';
-import { Public, ResponseMessage, User } from 'src/decorator/customize';
+import {
+  Public,
+  ResponseMessage,
+  SkipCheckPermission,
+  User,
+} from 'src/decorator/customize';
 
 @Controller('subscribers')
 export class SubscribersController {
@@ -20,7 +25,10 @@ export class SubscribersController {
 
   @Post()
   @ResponseMessage('Create Subscribers Success!!')
-  create(@Body() createSubscriberDto: CreateSubscriberDto, @User() user: IUser) {
+  create(
+    @Body() createSubscriberDto: CreateSubscriberDto,
+    @User() user: IUser,
+  ) {
     return this.subscribersService.create(createSubscriberDto, user);
   }
 
@@ -35,6 +43,13 @@ export class SubscribersController {
     return this.subscribersService.findAll(current, pageSize, qs);
   }
 
+  @Post('skills')
+  @ResponseMessage("Get Subscribers's skills")
+  @SkipCheckPermission()
+  getUserSkill(@User() user: IUser) {
+    return this.subscribersService.getSkills(user);
+  }
+
   @Get(':id')
   @Public()
   @ResponseMessage('Get  Subscriber By Id Success!!')
@@ -42,14 +57,14 @@ export class SubscribersController {
     return this.subscribersService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch()
+  @SkipCheckPermission()
   @ResponseMessage('Update Subscribers Success!!')
   update(
-    @Param('id') id: string,
     @Body() updateSubscriberDto: UpdateSubscriberDto,
     @User() user: IUser,
   ) {
-    return this.subscribersService.update(id, updateSubscriberDto, user);
+    return this.subscribersService.update(updateSubscriberDto, user);
   }
 
   @Delete(':id')

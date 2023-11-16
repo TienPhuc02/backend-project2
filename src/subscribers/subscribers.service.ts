@@ -12,14 +12,11 @@ import aqp from 'api-query-params';
 @Injectable()
 export class SubscribersService {
   constructor(
-    @InjectModel(Subscriber.name) private subscriberModel: SoftDeleteModel<UserDocument>,
+    @InjectModel(Subscriber.name)
+    private subscriberModel: SoftDeleteModel<UserDocument>,
   ) {}
   async create(createSubscriberDto: CreateSubscriberDto, user: IUser) {
-    const {
-      name,
-      skills,
-      email
-    } = createSubscriberDto;
+    const { name, skills, email } = createSubscriberDto;
     const newSubscriber = await this.subscriberModel.create({
       name,
       skills,
@@ -85,12 +82,9 @@ export class SubscribersService {
     return this.subscriberModel.findOne({ _id: id });
   }
 
-  update = async (id: string, updateSubscriberDto: UpdateSubscriberDto, user: IUser) => {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return 'not found subscriber';
-    }
+  update = async (updateSubscriberDto: UpdateSubscriberDto, user: IUser) => {
     const newSubscriberUpdate = await this.subscriberModel.updateOne(
-      { _id: id },
+      { email: user.email },
       {
         ...updateSubscriberDto,
         updatedBy: {
@@ -98,6 +92,7 @@ export class SubscribersService {
           email: user.email,
         },
       },
+      { upsert: true },
     );
     return newSubscriberUpdate;
   };
@@ -117,6 +112,10 @@ export class SubscribersService {
     );
     return this.subscriberModel.softDelete({ _id: id });
   };
+  async getSkills(user: IUser) {
+    const { email } = user;
+    return await this.subscriberModel.findOne({email},{skills:1})
+  }
 }
 
 //nếu mà chưa có company thì tự thêm company
