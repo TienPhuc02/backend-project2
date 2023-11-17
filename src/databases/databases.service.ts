@@ -6,7 +6,10 @@ import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { UsersService } from 'src/users/users.service';
 import { ADMIN_ROLE, INIT_PERMISSIONS, USER_ROLE } from './sample';
 import { User, UserDocument } from 'src/users/schema/user.schema';
-import { Permission, PermissionDocument } from 'src/permissions/schema/permission.schema';
+import {
+  Permission,
+  PermissionDocument,
+} from 'src/permissions/schema/permission.schema';
 import { Role, RoleDocument } from 'src/roles/schema/role.schema';
 
 @Injectable()
@@ -75,8 +78,8 @@ export class DatabasesService implements OnModuleInit {
             role: adminRole?._id,
           },
           {
-            name: "I'm Hỏi Dân IT",
-            email: 'hoidanit@gmail.com',
+            name: "I'm Tiến Phúc",
+            email: 'tienphuc@gmail.com',
             password: this.userService.getHashPassword(
               this.configService.get<string>('INIT_PASSWORD'),
             ),

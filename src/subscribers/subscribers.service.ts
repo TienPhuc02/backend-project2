@@ -3,8 +3,7 @@ import { CreateSubscriberDto } from './dto/create-subscriber.dto';
 import { UpdateSubscriberDto } from './dto/update-subscriber.dto';
 import { IUser } from 'src/users/users.interface';
 import { InjectModel } from '@nestjs/mongoose';
-import { Subscriber } from './schema/subscriber.schema';
-import { UserDocument } from 'src/users/schema/user.schema';
+import { Subscriber, SubscriberDocument } from './schema/subscriber.schema';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import mongoose from 'mongoose';
 import aqp from 'api-query-params';
@@ -13,7 +12,7 @@ import aqp from 'api-query-params';
 export class SubscribersService {
   constructor(
     @InjectModel(Subscriber.name)
-    private subscriberModel: SoftDeleteModel<UserDocument>,
+    private subscriberModel: SoftDeleteModel<SubscriberDocument>,
   ) {}
   async create(createSubscriberDto: CreateSubscriberDto, user: IUser) {
     const { name, skills, email } = createSubscriberDto;

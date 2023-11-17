@@ -3,8 +3,7 @@ import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { IUser } from 'src/users/users.interface';
 import { InjectModel } from '@nestjs/mongoose';
-import { Job } from './schema/job.schema';
-import { UserDocument } from 'src/users/schema/user.schema';
+import { Job, JobDocument } from './schema/job.schema';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import mongoose from 'mongoose';
 import aqp from 'api-query-params';
@@ -12,7 +11,7 @@ import aqp from 'api-query-params';
 @Injectable()
 export class JobsService {
   constructor(
-    @InjectModel(Job.name) private jobModel: SoftDeleteModel<UserDocument>,
+    @InjectModel(Job.name) private jobModel: SoftDeleteModel<JobDocument>,
   ) {}
   async create(createJobDto: CreateJobDto, user: IUser) {
     const {
