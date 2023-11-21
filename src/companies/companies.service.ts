@@ -66,7 +66,7 @@ export class CompaniesService {
     };
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return 'not found company';
     }
