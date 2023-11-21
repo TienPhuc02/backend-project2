@@ -28,6 +28,14 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   handleRequest(err, user, info, context: ExecutionContext) {
+    console.log(
+      '🚀 ~ file: jwt-auth.guard.ts:31 ~ JwtAuthGuard ~ handleRequest ~ err:',
+      err,
+    );
+    console.log(
+      '🚀 ~ file: jwt-auth.guard.ts:31 ~ JwtAuthGuard ~ handleRequest ~ user:',
+      user,
+    );
     //lay request
     const request: Request = context.switchToHttp().getRequest();
     const isSkipPermission = this.reflector.getAllAndOverride<boolean>(

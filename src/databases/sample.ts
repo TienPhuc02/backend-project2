@@ -1,7 +1,7 @@
 export const ADMIN_ROLE = 'SUPER_ADMIN';
 export const USER_ROLE = 'NORMAL_USER';
 
-export const INIT_PERMISSIONS = [
+export const ADMIN_PERMISSIONS = [
   {
     _id: '648ab415f4328bd3153ee211',
     name: 'Get Company with paginate',
@@ -559,3 +559,4 @@ export const INIT_PERMISSIONS = [
     __v: 0,
   },
 ];
+
