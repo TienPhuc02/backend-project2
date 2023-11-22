@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 
 import { UsersService } from 'src/users/users.service';
-import { ADMIN_ROLE, ADMIN_PERMISSIONS, USER_ROLE } from './sample';
+import { ADMIN_ROLE, ADMIN_PERMISSIONS, USER_ROLE, USER_PERMISSIONS } from './sample';
 import { User, UserDocument } from 'src/users/schema/user.schema';
 import {
   Permission,
@@ -46,11 +46,10 @@ export class DatabasesService implements OnModuleInit {
       // create role
       if (countRole === 0) {
         const permissions = await this.permissionModel.find({}).select('_id');
-        console.log("🚀 ~ file: databases.service.ts:49 ~ DatabasesService ~ onModuleInit ~ permissions:", permissions)
-        const permissionsUser = await this.permissionModel.find({
-          module: 'FILES',
-        });
-        console.log("🚀 ~ file: databases.service.ts:52 ~ DatabasesService ~ onModuleInit ~ permissionsUser:", permissionsUser)
+        console.log(
+          '🚀 ~ file: databases.service.ts:49 ~ DatabasesService ~ onModuleInit ~ permissions:',
+          permissions,
+        );
         await this.roleModel.insertMany([
           {
             name: ADMIN_ROLE,
@@ -62,7 +61,7 @@ export class DatabasesService implements OnModuleInit {
             name: USER_ROLE,
             description: 'Người dùng/Ứng viên sử dụng hệ thống',
             isActive: true,
-            permissions: permissionsUser, //không set quyền, chỉ cần add ROLE
+            permissions: USER_PERMISSIONS, //không set quyền, chỉ cần add ROLE
           },
         ]);
       }

@@ -146,6 +146,9 @@ export class ResumesService {
     return this.resumeModel.softDelete({ _id: id });
   };
   findOneByUser = async (user: IUser) => {
-    return this.resumeModel.findOne({ _id: user._id });
+    return this.resumeModel
+      .findOne({ email: user.email })
+      .populate('companyId') // Populate the 'companyId' field
+      .populate('jobId'); // Populate the 'jobId' field;
   };
 }

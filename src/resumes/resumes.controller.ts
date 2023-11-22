@@ -40,7 +40,7 @@ export class ResumesController {
     return this.resumesService.findOne(id);
   }
 
-  @Post('/by-user')
+  @Post('by-user')
   @ResponseMessage('Get  Job By User Success!!')
   findOneByUser(@User() user: IUser) {
     return this.resumesService.findOneByUser(user);
