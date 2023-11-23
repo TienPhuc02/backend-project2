@@ -146,8 +146,12 @@ export class ResumesService {
     return this.resumeModel.softDelete({ _id: id });
   };
   findOneByUser = async (user: IUser) => {
+    console.log(
+      '🚀 ~ file: resumes.service.ts:149 ~ ResumesService ~ findOneByUser= ~ user:',
+      user.email,
+    );
     return this.resumeModel
-      .findOne({ email: user.email })
+      .find({ email: user.email })
       .populate('companyId') // Populate the 'companyId' field
       .populate('jobId'); // Populate the 'jobId' field;
   };
