@@ -72,6 +72,14 @@ export class JobsService {
       // @ts-ignore: Unreachable code error
       sort = '-createdAt';
     }
+    if ((sort as any) === '-salary') {
+      // @ts-ignore: Unreachable code error
+      sort = '-salary';
+    }
+    if (typeof (sort as any) === 'number') {
+      // @ts-ignore: Unreachable code error
+      sort = sort;
+    }
     const result = await this.jobModel
       .find(filter)
       .skip(offset)
