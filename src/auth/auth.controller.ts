@@ -11,12 +11,13 @@ import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { Public, ResponseMessage, User } from 'src/decorator/customize';
 import { UsersService } from 'src/users/users.service';
-import { RegisterUserDto } from 'src/users/dto/create-user.dto';
+import { RegisterUserDto, UserLoginDto } from 'src/users/dto/create-user.dto';
 import { Request, Response } from 'express';
 import { IUser } from 'src/users/users.interface';
 import { RolesService } from 'src/roles/roles.service';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
-
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -29,6 +30,7 @@ export class AuthController {
   @UseGuards(ThrottlerGuard)
   @UseGuards(LocalAuthGuard)
   @Throttle({ default: { limit: 3, ttl: 60 } })
+  @ApiBody({ type: UserLoginDto })
   @Post('/login')
   @ResponseMessage('Login SuccessFull!')
   handleLogin(@Req() req, @Res({ passthrough: true }) response: Response) {

@@ -22,12 +22,10 @@ import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    ThrottlerModule.forRoot([
-      {
-        ttl: 60,
-        limit: 5,
-      },
-    ]),
+    ThrottlerModule.forRoot([{
+      ttl: 60,
+      limit: 3,
+    }]),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
