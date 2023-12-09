@@ -8,14 +8,16 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
-  ParseFilePipeBuilder,
-  HttpStatus,
+  UseFilters,
+  // ParseFilePipeBuilder,
+  // HttpStatus,
 } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ResponseMessage } from 'src/decorator/customize';
 import { ApiTags } from '@nestjs/swagger';
+import { HttpExceptionFilter } from 'src/core/http-exception.filter';
 @ApiTags('files')
 @Controller('files')
 export class FilesController {
@@ -24,20 +26,9 @@ export class FilesController {
   @Post('upload')
   @ResponseMessage('Post Files Success!!')
   @UseInterceptors(FileInterceptor('fileUpload'))
+  @UseFilters(new HttpExceptionFilter())
   uploadFile(
-    @UploadedFile(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType:
-            /(jpg|jpeg|application\/msword|image\/jpeg|image\/gif|application\/vnd.openxmlformats-officedocument.wordprocessingml.document|png|gif|image\/png|txt|pdf|doc|docx|text\/plain|application\/pdf)$/,
-        })
-        .addMaxSizeValidator({
-          maxSize: 1024 * 1024, //1MB
-        })
-        .build({
-          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-        }),
-    )
+    @UploadedFile()
     file: Express.Multer.File,
   ) {
     return {
