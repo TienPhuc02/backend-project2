@@ -86,7 +86,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -96,9 +96,13 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >MulterConfigService</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >HttpExceptionFilter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,31 +126,24 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/files/multer.config.ts</code>
+            <code>src/core/http-exception.filter.ts</code>
         </p>
 
 
 
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>ExceptionFilter</code>
+            </p>
 
 
             <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#getRootPath" >getRootPath</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -157,10 +154,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createMulterOptions" >createMulterOptions</a>
-                            </li>
-                            <li>
-                                <a href="#ensureExists" >ensureExists</a>
+                                <a href="#catch" >catch</a>
                             </li>
                         </ul>
                     </td>
@@ -175,6 +169,7 @@
 </section>
 
 
+
             <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -184,61 +179,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createMulterOptions"></a>
+                    <a name="catch"></a>
                     <span class="name">
-                        <span ><b>createMulterOptions</b></span>
-                        <a href="#createMulterOptions"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>catch</b></span>
+                        <a href="#catch"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createMulterOptions()</code>
+<code>catch(exception: HttpException, host: ArgumentsHost)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/files/multer.config.ts:38</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>MulterModuleOptions</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ensureExists"></a>
-                    <span class="name">
-                        <span ><b>ensureExists</b></span>
-                        <a href="#ensureExists"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ensureExists(targetDirectory: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/files/multer.config.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="11"
+                                    class="link-to-prism">src/core/http-exception.filter.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -259,9 +217,21 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>targetDirectory</td>
+                                                <td>exception</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        <code>HttpException</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>host</td>
+                                            <td>
+                                                        <code>ArgumentsHost</code>
                                             </td>
 
                                             <td>
@@ -285,132 +255,43 @@
         </tbody>
     </table>
 </section>
-            <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getRootPath"></a>
-                    <span class="name">
-                        <span ><b>getRootPath</b></span>
-                        <a href="#getRootPath"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/files/multer.config.ts:11</a></div>
-                        </td>
-                    </tr>
 
 
-        </tbody>
-    </table>
-</section>
+
+
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
-import {
-  MulterModuleOptions,
-  MulterOptionsFactory,
-} from &#x27;@nestjs/platform-express&#x27;;
-import fs from &#x27;fs&#x27;;
-import { diskStorage } from &#x27;multer&#x27;;
-import path, { join } from &#x27;path&#x27;;
-@Injectable()
-export class MulterConfigService implements MulterOptionsFactory {
-  getRootPath &#x3D; () &#x3D;&gt; {
-    return process.cwd();
-  };
-  ensureExists(targetDirectory: string) {
-    fs.mkdir(targetDirectory, { recursive: true }, (error) &#x3D;&gt; {
-      if (!error) {
-        console.log(&#x27;Directory successfully created, or it already exists.&#x27;);
-        return;
-      }
-      switch (error.code) {
-        case &#x27;EEXIST&#x27;:
-          // Error:
-          // Requested location already exists, but it&#x27;s not a directory.
-          break;
-        case &#x27;ENOTDIR&#x27;:
-          // Error:
-          // The parent hierarchy contains a file with the same name as the dir
-          // you&#x27;re trying to create.
-          break;
-        default:
-          // Some other error like permission denied.
-          console.error(error);
-          break;
-      }
-    });
-  }
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ExceptionFilter,
+  Catch,
+  ArgumentsHost,
+  HttpException,
+} from &#x27;@nestjs/common&#x27;;
+import { Request, Response } from &#x27;express&#x27;;
 
-  createMulterOptions(): MulterModuleOptions {
-    return {
-      storage: diskStorage({
-        destination: (req, file, cb) &#x3D;&gt; {
-          const folder &#x3D; req?.headers?.folder_type ?? &#x27;default&#x27;;
-          this.ensureExists(&#x60;public/images/${folder}&#x60;);
-          cb(null, join(this.getRootPath(), &#x60;public/images/${folder}&#x60;));
-        },
-        filename: (req, file, cb) &#x3D;&gt; {
-          //get image extension
-          const extName &#x3D; path.extname(file.originalname);
-          //get image&#x27;s name (without extension)
-          const baseName &#x3D; path.basename(file.originalname, extName);
-          const finalName &#x3D; &#x60;${baseName}-${Date.now()}${extName}&#x60;;
-          cb(null, finalName);
-        },
-      }),
-      fileFilter: (req, file, cb) &#x3D;&gt; {
-        const allowedFileTypes &#x3D; [
-          &#x27;jpg&#x27;,
-          &#x27;jpeg&#x27;,
-          &#x27;png&#x27;,
-          &#x27;gif&#x27;,
-          &#x27;pdf&#x27;,
-          &#x27;doc&#x27;,
-          &#x27;docx&#x27;,
-        ];
-        const fileExtension &#x3D; file.originalname.split(&#x27;.&#x27;).pop().toLowerCase();
-        const isValidFileType &#x3D; allowedFileTypes.includes(fileExtension);
-        if (!isValidFileType) {
-          cb(
-            new HttpException(
-              &#x27;Invalid file type&#x27;,
-              HttpStatus.UNPROCESSABLE_ENTITY,
-            ),
-            null,
-          );
-        } else cb(null, true);
-      },
-      limits: {
-        fileSize: 1024 * 1024 * 1, // 1MB
-      },
-    };
+@Catch(HttpException)
+export class HttpExceptionFilter implements ExceptionFilter {
+  catch(exception: HttpException, host: ArgumentsHost) {
+    const ctx &#x3D; host.switchToHttp();
+    const response &#x3D; ctx.getResponse&lt;Response&gt;();
+    const request &#x3D; ctx.getRequest&lt;Request&gt;();
+    const status &#x3D; exception.getStatus();
+
+    response.status(status).json({
+      statusCode: status,
+      timestamp: new Date().toISOString(),
+      path: request.url,
+      error: &#x27;paylay to large&#x27;,
+      message: &#x27;File too large customize&#x27;,
+    });
   }
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
 
 
 
@@ -445,8 +326,8 @@ export class MulterConfigService implements MulterOptionsFactory {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'MulterConfigService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'HttpExceptionFilter.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

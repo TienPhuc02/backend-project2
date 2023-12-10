@@ -558,6 +558,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/File.html" data-type="entity-link" >File</a>
                             </li>
                             <li class="link">
+                                <a href="classes/HttpExceptionFilter.html" data-type="entity-link" >HttpExceptionFilter</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/Job.html" data-type="entity-link" >Job</a>
                             </li>
                             <li class="link">

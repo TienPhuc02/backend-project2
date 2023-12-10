@@ -24,13 +24,13 @@
 <title>cluster_RolesModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="129,-70 129,-268 367,-268 367,-70 129,-70"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_RolesModule_exports</title>
-<polygon fill="none" stroke="black" points="137,-208 137,-260 359,-260 359,-208 137,-208"/>
-</g>
 <g id="clust6" class="cluster">
 <title>cluster_RolesModule_providers</title>
 <polygon fill="none" stroke="black" points="178,-78 178,-130 318,-130 318,-78 178,-78"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_RolesModule_exports</title>
+<polygon fill="none" stroke="black" points="137,-208 137,-260 359,-260 359,-208 137,-208"/>
 </g>
 <!-- RolesModule  -->
 <g id="node1" class="node">
