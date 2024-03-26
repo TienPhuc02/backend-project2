@@ -68,6 +68,7 @@ export class AuthService {
         name,
         permissions,
       },
+      refresh_token: refresh_token,
     };
   }
   createRefreshToken = async (payload) => {

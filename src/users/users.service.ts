@@ -121,7 +121,7 @@ export class UsersService {
   findOneByUsername(username: string) {
     return this.userModel
       .findOne({ email: username })
-      .populate({ path: 'role', select: { name: 1 } });
+      .populate({ path: 'role', select: { name: 1, description: 1 } });
   }
 
   isValidPassword = (password: string, hash: string) => {
