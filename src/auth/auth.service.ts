@@ -34,7 +34,20 @@ export class AuthService {
     return null;
   }
   async login(user: any, response: Response) {
-    const { email, _id, role, name, age, gender, address, permissions } = user;
+    const {
+      email,
+      _id,
+      role,
+      name,
+      age,
+      gender,
+      address,
+      permissions,
+      createdAt,
+      updatedAt,
+      deletedAt,
+      isDeleted,
+    } = user;
     const payload = {
       email,
       _id,
@@ -67,6 +80,10 @@ export class AuthService {
         role,
         name,
         permissions,
+        createdAt,
+        updatedAt,
+        deletedAt,
+        isDeleted,
       },
       refresh_token: refresh_token,
     };
